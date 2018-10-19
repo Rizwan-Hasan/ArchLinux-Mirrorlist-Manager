@@ -1,38 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-"""
-__author__ = "Rizwan Hasan"
-__copyright__ = "Copyright 2018"
-__license__ = "GPL3"
-__version__ = "1.0"
-__maintainer__ = "Rizwan Hasan"
-__email__ = "rizwan.hasan486@gmail.com"
-
-"""
-
 import os
 import sys
-import time
 import subprocess
 import webbrowser
-from functools import partial
 
 # My Imports
 import threads
 import resources
 import mirrorlist
-import rankmirrors
 from dependency import checker
 
 # PyQt5 Imports
-import sip
 from PyQt5 import uic
-from PyQt5 import QtGui, QtCore
+# from PyQt5 import QtGui, QtCore
 from PyQt5.QtGui import QIcon, QPixmap, QMovie
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QLabel, QPushButton
-from PyQt5.QtWidgets import QFileDialog, QDesktopWidget, QTextEdit
-from PyQt5.QtCore import pyqtSlot, pyqtSignal, QThread
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
+from PyQt5.QtWidgets import QFileDialog, QDesktopWidget
+from PyQt5.QtCore import pyqtSlot
 
 # Application root location ↓
 appFolder = os.path.dirname(os.path.realpath(sys.argv[0])) + '/'
@@ -44,33 +30,37 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         uic.loadUi(appFolder + 'MainWindow.ui', self)
 
-        # ↓
+        # Dependency and Files checker↓
         if checker().check() is False:
-            sys.exit("Dependency missing")
+            sys.exit("Dependency missing or you have edited something")
 
         # Class Object Variables ↓
         self.mirrorlist = mirrorlist.Mirrorlist()
         self.ProgressLoader = threads.ProgressLoader()
         self.ProgressLoader_Rankmirrors = threads.ProgressLoader_Rankmirrors()
 
-        # Normal Variables ↓
+        # General Variables ↓
         self.mirrorlistFile = "/etc/pacman.d/mirrorlist"
         self.mirrorlistTemp = "/tmp/mirrorlist.temp"
         self.mirrorlistData = None
         self.comboBoxEntry = None
         self.comboBoxNumberEntry = None
         self.asroot = None
+        self.contactURL = 'https://github.com/Rizwan-Hasan'
+        self.sourcecodeURL = 'https://github.com/Rizwan-Hasan/ArchLinux-Mirrorlist-Manager'
 
-        # Icon Variables ↓
+        # Icon's Variables ↓
         self.icon = QIcon(':icon/icon.png')
         self.done = QPixmap(':done/done.png')
         self.distro = QPixmap(self.distroVar())
         self.loadingBar = QMovie(':loading/loading.gif')
         self.loadingCube = QMovie(':loading/cube_loading.gif')
 
+        # Calling fucntions ↓
         self.asrootDeclare()
         self.AppMainWindow()
 
+    # Distribution checking↓
     def distroVar(self):
         distro_name = subprocess.getoutput('lsb_release -i')
         distro_name = distro_name.split()
@@ -80,19 +70,21 @@ class MainWindow(QMainWindow):
         else:
             return ':linux/archlinux.png'
 
+    # For launching windows in center ↓
     def makeWindowCenter(self):
-        # For launching windows in center
         qtRectangle = self.frameGeometry()
         centerPoint = QDesktopWidget().availableGeometry().center()
         qtRectangle.moveCenter(centerPoint)
         self.move(qtRectangle.topLeft())
 
+    # Defining root permission using method ↓
     def asrootDeclare(self):
         if os.path.isfile('/usr/bin/gui-sudo') is True:
             self.asroot = "/usr/bin/gui-sudo "
         else:
             self.asroot = "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY "
 
+    # Main Application Window ↓
     def AppMainWindow(self):
         # Making window centered ↓
         self.makeWindowCenter()
@@ -104,12 +96,10 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('ArchLinux Mirrorlist Manager')
         self.setWindowIcon(self.icon)
 
-        self.statusBar().showMessage("Hello World")
-
-        # ↓
+        # Header label ↓
         self.labelHeader.setText(subprocess.getoutput("uname -rom"))
 
-        # ↓
+        # Buttons's Actions↓
         self.pushButtonQuit.clicked.connect(self.closeDialogue)
         self.pushButtonReload.clicked.connect(self.loadSysMirrorlist)
         self.pushButtonSave.clicked.connect(self.saveButtonAction)
@@ -119,13 +109,14 @@ class MainWindow(QMainWindow):
         self.pushButtonContact.clicked.connect(self.browserContact)
         self.pushButtonSourcecode.clicked.connect(self.browserSourcecode)
 
-        # ↓
+        # Other Actions↓
         self.labelLoading.setPixmap(self.distro)
         self.labelAboutDistro.setPixmap(self.distro)
         self.comboBoxCountry.activated[str].connect(self.comboEntryMaker)
         self.comboBoxNumber.activated[str].connect(self.comboNumberEntryMaker)
 
     @pyqtSlot()  # Qt Framework's Slot Decorator
+    # Closeevent dialogue ↓
     def closeEvent(self, event):
         reply = QMessageBox.question(self, 'Message', "Are you sure to quit?\nAll changes will be lost.",
                                         QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
@@ -136,6 +127,7 @@ class MainWindow(QMainWindow):
             self.statusBar().showMessage('Welcome back.')
             event.ignore()
 
+    # Close dialouge message ↓
     def closeDialogue(self):
         reply = QMessageBox.question(self, 'Message', "Are you sure to quit?\nAll changes will be lost.",
                                         QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
@@ -165,7 +157,7 @@ class MainWindow(QMainWindow):
                 self.statusBar().showMessage("Unable to save '" + fileName + "'")
         self.pushButtonSaveAs.clicked.connect(self.saveFileDialog)
 
-    # ↓
+    # Save Button's Actons↓
     def saveButtonAction(self):
         try:
             self.pushButtonSave.clicked.disconnect()
@@ -182,14 +174,15 @@ class MainWindow(QMainWindow):
             self.statusBar().showMessage("Unable to save file")
         self.pushButtonSave.clicked.connect(self.saveButtonAction)
 
-    # Combox Actions ↓
+    # Country Combox Actions ↓
     def comboEntryMaker(self, x):
         self.comboBoxEntry = str(x)
 
+    # Number Combox Actions ↓
     def comboNumberEntryMaker(self, x):
         self.comboBoxNumberEntry = x
 
-    # ↓
+    # Reload Button's Actions↓
     def loadSysMirrorlist(self, x=1):
         try:
             self.pushButtonReload.clicked.disconnect()
@@ -203,6 +196,7 @@ class MainWindow(QMainWindow):
             self.statusBar().showMessage("Mirrorlist has been reloaded")
         self.pushButtonReload.clicked.connect(self.loadSysMirrorlist)
 
+    # Animation Method ↓
     def loadingBarAnimation(self, decider: bool):
         if decider is True:
             self.labelLoading.setMovie(self.loadingBar)
@@ -232,6 +226,7 @@ class MainWindow(QMainWindow):
         self.ProgressLoader.status.connect(self.statusBar().showMessage)
         self.pushButtonGenerate.clicked.connect(self.generateButtonAction)
 
+    # Rankmirrors Button's Actions ↓
     def rankmirrorsButtonAction(self):
         try:
             self.pushButtonRankmirrors.clicked.disconnect()
@@ -253,7 +248,7 @@ class MainWindow(QMainWindow):
             self.pushButtonContact.clicked.disconnect()
         except (AttributeError, TypeError):
             pass
-        webbrowser.open('https://github.com/Rizwan-Hasan')
+        webbrowser.open(self.contactURL)
         self.pushButtonContact.clicked.connect(self.browserContact)
 
     # Sourcecode Button Action ↓
@@ -262,19 +257,13 @@ class MainWindow(QMainWindow):
             self.pushButtonSourcecode.clicked.disconnect()
         except (AttributeError, TypeError):
             pass
-        webbrowser.open('https://bing.com')
+        webbrowser.open(self.sourcecodeURL)
         self.pushButtonSourcecode.clicked.connect(self.browserSourcecode)
-
-
-def darkTheme(x):
-    with open('darkorange.qss', 'r') as file:
-        x.setStyleSheet(file.read())
 
 
 # Main Function ↓
 def main():
     app = QApplication(sys.argv)
-    # darkTheme(app)
     mainWindow = MainWindow()
     mainWindow.show()
     sys.exit(app.exec_())

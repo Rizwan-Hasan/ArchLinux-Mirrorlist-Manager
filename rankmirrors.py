@@ -5,11 +5,13 @@ from dependency import checker
 from subprocess import getoutput
 
 
+# Mirrorlist Ranker ↓
 class MirrorRanker(checker):
 
     def __init__(self):
         super(MirrorRanker, self).__init__()
 
+    # Rankmirrors ↓
     def rank(self, num=3, mirrorfile='/etc/pacman.d/mirrorlist'):
         if self.check() is True:
             cmd = getoutput("which rankmirrors") + " -n " + str(num) + " " + mirrorfile
@@ -20,5 +22,4 @@ class MirrorRanker(checker):
 
 
 if __name__ == '__main__':
-    # print("Hello World")
-    print(MirrorRanker().rank())
+    print("Hello World")

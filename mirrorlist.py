@@ -16,6 +16,7 @@ class Mirrorlist():
         self.country_code_dataset = self.appFolder + 'country_code.data'
         self.url = "https://www.archlinux.org/mirrorlist/?COUNTRYCODEprotocol=http&protocol=https&ip_version=4"
 
+    # Mirrorlist getting ↓
     def get_mirrorlist(self, country_code):
         """
         try:
@@ -48,6 +49,7 @@ class Mirrorlist():
         """
         return mirrordata
 
+    # Mirrolist url creator ↓
     def create_url(self, country_code='country=all&'):
         url = self.url
         country_code = country_code.strip()
@@ -66,6 +68,7 @@ class Mirrorlist():
             url = url.replace('COUNTRYCODE', x)
         return url
 
+    # Country code detector ↓
     def country_code_detect(self, cinput):
         if (cinput == "all"):
             return "all"
@@ -73,11 +76,8 @@ class Mirrorlist():
         df = pd.read_csv(self.country_code_dataset)
         match = df['Country'].str.match(cinput)
         contry_code = df[match].values[0][1]
-        # print(contry_code)
         return contry_code
 
 
 if __name__ == '__main__':
-    # print(Mirrorlist().get_mirrorlist('all'))
-    # print(Mirrorlist().create_url('all'))
     print("Hello World")

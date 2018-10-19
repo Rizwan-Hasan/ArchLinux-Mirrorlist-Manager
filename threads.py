@@ -7,6 +7,7 @@ from rankmirrors import MirrorRanker
 from PyQt5.QtCore import pyqtSignal, QThread
 
 
+# Mirrorlist Generating Thread ↓
 class ProgressLoader(QThread):
 
     loaderOFF = pyqtSignal(bool)
@@ -31,6 +32,7 @@ class ProgressLoader(QThread):
             self.comboBoxEntry = comboBox
 
 
+# Mirrorlist Ranking Thread ↓
 class ProgressLoader_Rankmirrors(QThread):
 
     loaderOFF = pyqtSignal(bool)
@@ -49,12 +51,15 @@ class ProgressLoader_Rankmirrors(QThread):
         self.status.emit("Mirrorlist has been ranked successfully")
         self.mirrorlistData.emit(data)
 
-    def send(self, num: int, mirrorlist):
+    def send(self, num, mirrorlist):
+        if num == 'No of Server':
+            self.num = 3
+        else:
+            self.num = num
         tmpMirrorFile = '/tmp/.mirror.txt.tmp'
         os.system('rm -rf ' + tmpMirrorFile)
         with open(tmpMirrorFile, 'w') as file:
             file.write(mirrorlist)
-        self.num = num
         self.mirrorlistFile = tmpMirrorFile
 
 
