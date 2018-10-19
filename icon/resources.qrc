@@ -1,0 +1,29 @@
+<RCC>
+  <qresource prefix="icon">
+    <file>gmail.png</file>
+    <file>GPL3.png</file>
+    <file>icon.png</file>
+  </qresource>
+  <qresource prefix="button">
+    <file>rank.png</file>
+    <file>mail.png</file>
+    <file>github.png</file>
+    <file>exit.png</file>
+    <file>save.png</file>
+    <file>reload.png</file>
+    <file>process.png</file>
+    <file>server.png</file>
+    <file>about.png</file>
+  </qresource>
+  <qresource prefix="linux">
+    <file>archlinux.png</file>
+    <file>MagpieOS.png</file>
+  </qresource>
+  <qresource prefix="done">
+    <file>done.png</file>
+  </qresource>
+  <qresource prefix="loading">
+    <file>loading.gif</file>
+    <file>cube_loading.gif</file>
+  </qresource>
+</RCC>
