@@ -18,8 +18,8 @@ class checker():
 
     # Package avilability checker ↓
     def package_check(self):
-        import subprocess  # 'subprocess' Module Import
-        output = subprocess.getstatusoutput("pacman -Q pacman-contrib pacman-mirrorlist magpie-mirrorlist")
+        packages = "pacman-contrib pacman-mirrorlist pyqt5-common python-pyqt5 python-sip-pyqt5 python-pandas"
+        output = subprocess.getstatusoutput("pacman -Q " + packages)
         if output[0] is 0:
             output = subprocess.getstatusoutput("which rankmirrors")
             if output[0] is 0:
