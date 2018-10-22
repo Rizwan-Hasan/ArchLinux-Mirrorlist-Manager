@@ -12,6 +12,10 @@
 * python-pandas >= 0.23.4
 * pacman-contrib >= 1.1.0
 
+### PKGBUILD
+
+<a href="https://github.com/Rizwan-Hasan/MagpieOS-Packages/tree/master/ArchLinux-Mirrorlist-Manager">https://github.com/Rizwan-Hasan/MagpieOS-Packages/tree/master/ArchLinux-Mirrorlist-Manager</a>
+
 ### Screenshot
 
 <a href="https://imgur.com/L95d4k2"><img src="https://i.imgur.com/L95d4k2.png" title="source: imgur.com" /></a>
