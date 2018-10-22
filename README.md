@@ -11,3 +11,7 @@
 * pyqt5-common >= 5.11.2
 * python-pandas >= 0.23.4
 * pacman-contrib >= 1.1.0
+
+### Screenshot
+
+<a href="https://imgur.com/L95d4k2"><img src="https://i.imgur.com/L95d4k2.png" title="source: imgur.com" /></a>
