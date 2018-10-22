@@ -41,7 +41,7 @@ class Mirrorlist():
 
         mirrordata = mirrordata.replace("#Server =", "Server =")
         mirrordata = mirrordata.replace("## Arch Linux", distro_name)
-        mirrordata = mirrordata.replace("Generated", "Generated with Rizwan Hasan")
+        mirrordata = mirrordata.replace("Generated", "Generated with Mirrorlist Manager")
         """
         with open(self.mirrorfile, 'w') as file:
             file.write(mirrordata)
