@@ -79,10 +79,7 @@ class MainWindow(QMainWindow):
 
     # Defining root permission using method ↓
     def asrootDeclare(self):
-        if os.path.isfile('/usr/bin/gui-sudo') is True:
-            self.asroot = "/usr/bin/gui-sudo "
-        else:
-            self.asroot = "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY "
+        self.asroot = "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY "
 
     # Main Application Window ↓
     def AppMainWindow(self):
@@ -97,7 +94,7 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(self.icon)
 
         # Header label ↓
-        self.labelHeader.setText(subprocess.getoutput("uname -rom"))
+        self.labelHeader.setText(subprocess.getoutput("uname -rm"))
 
         # Buttons's Actions↓
         self.pushButtonQuit.clicked.connect(self.closeDialogue)
