@@ -14,7 +14,7 @@ class checker():
     def __init__(self):
         # Hash Variable
         self.country_data = 'b6bd3a5c2044346efb684bf053b535c3'
-        self.MainWindowUi = '6ebbb33a3aa551c0ca0f194725a0fe4e'
+        self.MainWindowUi = '3f454854f53d873c21c6b44d60b6df6d'
 
     # Package avilability checker ↓
     def package_check(self):
