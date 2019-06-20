@@ -274,6 +274,11 @@
       </item>
       <item>
        <property name="text">
+        <string>Canada</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
         <string>Chile</string>
        </property>
       </item>
