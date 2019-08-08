@@ -134,6 +134,7 @@ class MainWindow(QMainWindow):
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if reply == QMessageBox.Yes:
             self.statusBar().showMessage('Exited.')
+            sys.exit(0)
         else:
             self.statusBar().showMessage('Welcome back.')
 
