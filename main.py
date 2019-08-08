@@ -64,10 +64,13 @@ class MainWindow(QMainWindow):
     # Distribution checking↓
     def distroVar(self):
         distro_name = subprocess.getoutput('lsb_release -i')
-        regex = re.compile(r'\bMagpieOS\b', re.IGNORECASE)
-        distro_name = regex.findall(distro_name)
-        if distro_name:
+        magpieos = re.compile(r'MagpieOS', re.IGNORECASE)
+        manjaro = re.compile(r'Manjaro', re.IGNORECASE)
+        if magpieos.findall(distro_name):
             return ':linux/MagpieOS.png'
+        elif manjaro.findall(distro_name):
+            QMessageBox.information(self, 'Message', "Mirrorlist Manager doesn't support Manjaro")
+            sys.exit(0)
         else:
             return ':linux/archlinux.png'
 
@@ -131,7 +134,6 @@ class MainWindow(QMainWindow):
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if reply == QMessageBox.Yes:
             self.statusBar().showMessage('Exited.')
-            sys.exit()
         else:
             self.statusBar().showMessage('Welcome back.')
 
