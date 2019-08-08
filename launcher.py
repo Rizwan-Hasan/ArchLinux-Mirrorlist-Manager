@@ -5,7 +5,7 @@
 __author__ = "Rizwan Hasan"
 __copyright__ = "Copyright 2018"
 __license__ = "GPL3"
-__version__ = "1.2"
+__version__ = "1.3"
 __maintainer__ = "Rizwan Hasan"
 __email__ = "rizwan.hasan486@gmail.com"
 
