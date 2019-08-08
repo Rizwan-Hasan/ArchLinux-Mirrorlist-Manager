@@ -268,4 +268,5 @@ def main():
 
 # Start Application ↓
 if __name__ == '__main__':
-    print('Hello World')
+    main()
+    # print('Hello World')
