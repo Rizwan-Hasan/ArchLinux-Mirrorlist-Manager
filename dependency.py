@@ -8,7 +8,6 @@ from mirrorlist import Mirrorlist
 
 
 class checker():
-
     appFolder = os.path.dirname(os.path.realpath(sys.argv[0])) + '/'
 
     def __init__(self):
@@ -52,7 +51,7 @@ class checker():
     def check(self):
         x = self.package_check()
         y = self.hashcheck()
-        if(x == True and y == True):
+        if (x is True and y is True):
             return True
         else:
             return False
@@ -60,4 +59,3 @@ class checker():
 
 if __name__ == '__main__':
     print("Hello World")
-

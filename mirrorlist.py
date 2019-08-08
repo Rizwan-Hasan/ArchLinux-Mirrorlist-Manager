@@ -42,11 +42,9 @@ class Mirrorlist():
         mirrordata = mirrordata.replace("#Server =", "Server =")
         mirrordata = mirrordata.replace("## Arch Linux", distro_name)
         mirrordata = mirrordata.replace("Generated", "Generated with Mirrorlist Manager")
-        """
-        with open(self.mirrorfile, 'w') as file:
-            file.write(mirrordata)
-        os.system('chmod 777 ' + self.mirrorfile)
-        """
+        # with open(self.mirrorfile, 'w') as file:
+        #     file.write(mirrordata)
+        # os.system('chmod 777 ' + self.mirrorfile)
         return mirrordata
 
     # Mirrolist url creator ↓
