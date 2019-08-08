@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import re
 import subprocess
 import sys
 import webbrowser
@@ -63,9 +64,9 @@ class MainWindow(QMainWindow):
     # Distribution checking↓
     def distroVar(self):
         distro_name = subprocess.getoutput('lsb_release -i')
-        distro_name = distro_name.split()
-        distro_name = distro_name[2:]
-        if distro_name[0] == 'MagpieOS':
+        regex = re.compile(r'\bMagpieOS\b', re.IGNORECASE)
+        distro_name = regex.findall(distro_name)
+        if distro_name:
             return ':linux/MagpieOS.png'
         else:
             return ':linux/archlinux.png'
