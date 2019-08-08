@@ -1,4 +1,5 @@
-### Mirrorlist Manager: A Qt frontend for easy mirrorlist management on ArchLinux
+### Mirrorlist Manager
+#### A Qt frontend for easy mirrorlist management on ArchLinux
 ---------
 
 [![GitHub license](https://img.shields.io/github/license/calamares/calamares.svg)](https://github.com/calamares/calamares/blob/master/LICENSE)
