@@ -3,7 +3,7 @@
 
 [![GitHub license](https://img.shields.io/github/license/calamares/calamares.svg)](https://github.com/calamares/calamares/blob/master/LICENSE)
 
-#### Warning
+###### Warning
 ###### This sofware only supports those distros which use arch mirrors. Don't try this software on distro like Manjaro which not uses arch mirror. 
 
 ### Dependencies
