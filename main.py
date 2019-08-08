@@ -2,23 +2,23 @@
 # -*- coding: utf-8 -*-
 
 import os
-import sys
 import subprocess
+import sys
 import webbrowser
-
-# My Imports
-import threads
 import resources
-import mirrorlist
-from dependency import checker
 
 # PyQt5 Imports
 from PyQt5 import uic
+from PyQt5.QtCore import pyqtSlot
 # from PyQt5 import QtGui, QtCore
 from PyQt5.QtGui import QIcon, QPixmap, QMovie
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.QtWidgets import QFileDialog, QDesktopWidget
-from PyQt5.QtCore import pyqtSlot
+
+import mirrorlist
+# My Imports
+import threads
+from dependency import checker
 
 # Application root location ↓
 appFolder = os.path.dirname(os.path.realpath(sys.argv[0])) + '/'
@@ -97,14 +97,14 @@ class MainWindow(QMainWindow):
         self.labelHeader.setText(subprocess.getoutput("uname -rm"))
 
         # Buttons's Actions↓
-        self.pushButtonQuit.clicked.connect(self.closeDialogue)
-        self.pushButtonReload.clicked.connect(self.loadSysMirrorlist)
-        self.pushButtonSave.clicked.connect(self.saveButtonAction)
-        self.pushButtonSaveAs.clicked.connect(self.saveFileDialog)
-        self.pushButtonGenerate.clicked.connect(self.generateButtonAction)
-        self.pushButtonRankmirrors.clicked.connect(self.rankmirrorsButtonAction)
-        self.pushButtonContact.clicked.connect(self.browserContact)
-        self.pushButtonSourcecode.clicked.connect(self.browserSourcecode)
+        self.pushButtonQuit.clicked.connect(lambda: self.closeDialogue())
+        self.pushButtonReload.clicked.connect(lambda: self.loadSysMirrorlist())
+        self.pushButtonSave.clicked.connect(lambda: self.saveButtonAction())
+        self.pushButtonSaveAs.clicked.connect(lambda: self.saveFileDialog())
+        self.pushButtonGenerate.clicked.connect(lambda: self.generateButtonAction())
+        self.pushButtonRankmirrors.clicked.connect(lambda: self.rankmirrorsButtonAction())
+        self.pushButtonContact.clicked.connect(lambda: self.browserContact())
+        self.pushButtonSourcecode.clicked.connect(lambda: self.browserSourcecode())
 
         # Other Actions↓
         self.labelLoading.setPixmap(self.distro)
@@ -116,7 +116,7 @@ class MainWindow(QMainWindow):
     # Closeevent dialogue ↓
     def closeEvent(self, event):
         reply = QMessageBox.question(self, 'Message', "Are you sure to quit?\nAll changes will be lost.",
-                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if reply == QMessageBox.Yes:
             self.statusBar().showMessage('Exited.')
             event.accept()
@@ -127,7 +127,7 @@ class MainWindow(QMainWindow):
     # Close dialouge message ↓
     def closeDialogue(self):
         reply = QMessageBox.question(self, 'Message', "Are you sure to quit?\nAll changes will be lost.",
-                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if reply == QMessageBox.Yes:
             self.statusBar().showMessage('Exited.')
             sys.exit()
@@ -152,7 +152,7 @@ class MainWindow(QMainWindow):
             except PermissionError:
                 pass
                 self.statusBar().showMessage("Unable to save '" + fileName + "'")
-        self.pushButtonSaveAs.clicked.connect(self.saveFileDialog)
+        self.pushButtonSaveAs.clicked.connect(lambda: self.saveFileDialog())
 
     # Save Button's Actons↓
     def saveButtonAction(self):
@@ -169,7 +169,7 @@ class MainWindow(QMainWindow):
             self.labelLoading.setPixmap(self.distro)
         else:
             self.statusBar().showMessage("Unable to save file")
-        self.pushButtonSave.clicked.connect(self.saveButtonAction)
+        self.pushButtonSave.clicked.connect(lambda: self.saveButtonAction())
 
     # Country Combox Actions ↓
     def comboEntryMaker(self, x):
@@ -191,7 +191,7 @@ class MainWindow(QMainWindow):
         self.labelLoading.setPixmap(self.distro)
         if x is False:
             self.statusBar().showMessage("Mirrorlist has been reloaded")
-        self.pushButtonReload.clicked.connect(self.loadSysMirrorlist)
+        self.pushButtonReload.clicked.connect(lambda: self.loadSysMirrorlist())
 
     # Animation Method ↓
     def loadingBarAnimation(self, decider: bool):
@@ -221,7 +221,7 @@ class MainWindow(QMainWindow):
         self.ProgressLoader.loaderOFF.connect(self.loadingBarAnimation)
         self.ProgressLoader.mirrorlistData.connect(self.plainTextEdit.setPlainText)
         self.ProgressLoader.status.connect(self.statusBar().showMessage)
-        self.pushButtonGenerate.clicked.connect(self.generateButtonAction)
+        self.pushButtonGenerate.clicked.connect(lambda: self.generateButtonAction())
 
     # Rankmirrors Button's Actions ↓
     def rankmirrorsButtonAction(self):
@@ -237,25 +237,25 @@ class MainWindow(QMainWindow):
         self.ProgressLoader_Rankmirrors.loaderOFF.connect(self.loadingBarAnimation)
         self.ProgressLoader_Rankmirrors.mirrorlistData.connect(self.plainTextEdit.setPlainText)
         self.ProgressLoader_Rankmirrors.status.connect(self.statusBar().showMessage)
-        self.pushButtonRankmirrors.clicked.connect(self.rankmirrorsButtonAction)
+        self.pushButtonRankmirrors.clicked.connect(lambda: self.rankmirrorsButtonAction())
 
     # Contact Button Action ↓
-    def browserContact(self, link):
+    def browserContact(self):
         try:
             self.pushButtonContact.clicked.disconnect()
         except (AttributeError, TypeError):
             pass
         webbrowser.open(self.contactURL)
-        self.pushButtonContact.clicked.connect(self.browserContact)
+        self.pushButtonContact.clicked.connect(lambda: self.browserContact())
 
     # Sourcecode Button Action ↓
-    def browserSourcecode(self, link):
+    def browserSourcecode(self):
         try:
             self.pushButtonSourcecode.clicked.disconnect()
         except (AttributeError, TypeError):
             pass
         webbrowser.open(self.sourcecodeURL)
-        self.pushButtonSourcecode.clicked.connect(self.browserSourcecode)
+        self.pushButtonSourcecode.clicked.connect(lambda: self.browserSourcecode())
 
 
 # Main Function ↓
