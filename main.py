@@ -117,7 +117,7 @@ class MainWindow(QMainWindow):
         self.comboBoxNumber.activated[str].connect(self.comboNumberEntryMaker)
 
     @pyqtSlot()  # Qt Framework's Slot Decorator
-    # Closeevent dialogue ↓
+    # Close event dialogue ↓
     def closeEvent(self, event):
         reply = QMessageBox.question(self, 'Message', "Are you sure to quit?\nAll changes will be lost.",
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
