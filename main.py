@@ -14,7 +14,7 @@ from PyQt5.QtCore import pyqtSlot
 # from PyQt5 import QtGui, QtCore
 from PyQt5.QtGui import QIcon, QPixmap, QMovie
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
-from PyQt5.QtWidgets import QFileDialog, QDesktopWidget
+from PyQt5.QtWidgets import QFileDialog, QDesktopWidget, QStyleFactory
 
 import mirrorlist
 # My Imports
@@ -265,6 +265,7 @@ class MainWindow(QMainWindow):
 # Main Function ↓
 def main():
     app = QApplication(sys.argv)
+    app.setStyle(QStyleFactory.create('Fusion'))
     mainWindow = MainWindow()
     mainWindow.show()
     sys.exit(app.exec_())
