@@ -13,7 +13,7 @@ class checker():
     def __init__(self):
         # Hash Variable
         self.country_data = 'b6bd3a5c2044346efb684bf053b535c3'
-        self.MainWindowUi = '3f454854f53d873c21c6b44d60b6df6d'
+        self.MainWindowUi = '6bff8ee088e628dd89232ac37e48eb48'
 
     # Package avilability checker ↓
     def package_check(self):

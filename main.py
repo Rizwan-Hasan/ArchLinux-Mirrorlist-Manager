@@ -265,7 +265,6 @@ class MainWindow(QMainWindow):
 # Main Function ↓
 def main():
     app = QApplication(sys.argv)
-    app.setStyle(QStyleFactory.create('Fusion'))
     mainWindow = MainWindow()
     mainWindow.show()
     sys.exit(app.exec_())
@@ -273,5 +272,6 @@ def main():
 
 # Start Application ↓
 if __name__ == '__main__':
-    print('Hello World')
+    main()
+    # print('Hello World')
 
