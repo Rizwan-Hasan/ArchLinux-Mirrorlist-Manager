@@ -17,7 +17,7 @@ class checker():
 
     # Package avilability checker ↓
     def package_check(self):
-        packages = "pacman-contrib pacman-mirrorlist pyqt5-common python-pyqt5 python-sip-pyqt5 python-pandas"
+        packages = "pacman-contrib pacman-mirrorlist python-pyqt5 python-pandas"
         output = subprocess.getstatusoutput("pacman -Q " + packages)
         if output[0] is 0:
             output = subprocess.getstatusoutput("which rankmirrors")
