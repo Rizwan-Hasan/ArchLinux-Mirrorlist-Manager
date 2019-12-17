@@ -14,7 +14,7 @@ from PyQt5.QtCore import pyqtSlot
 # from PyQt5 import QtGui, QtCore
 from PyQt5.QtGui import QIcon, QPixmap, QMovie
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
-from PyQt5.QtWidgets import QFileDialog, QDesktopWidget
+from PyQt5.QtWidgets import QFileDialog, QDesktopWidget, QStyleFactory
 
 import mirrorlist
 # My Imports
@@ -272,5 +272,6 @@ def main():
 
 # Start Application ↓
 if __name__ == '__main__':
-    print('Hello World')
+    main()
+    # print('Hello World')
 
