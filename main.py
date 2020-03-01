@@ -33,7 +33,7 @@ class MainWindow(QMainWindow):
 
         # # Dependency and Files checker↓
         # if checker().check() is False:
-        #     sys.exit("Dependency missing or you have edited something")
+        #     sys.exit("Dependency missing, or you have edited something")
 
         # Class Object Variables ↓
         self.mirrorlist = mirrorlist.Mirrorlist()
