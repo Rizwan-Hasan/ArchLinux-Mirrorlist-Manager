@@ -6,18 +6,15 @@ import re
 import subprocess
 import sys
 import webbrowser
-import resources
 
 # PyQt5 Imports
 from PyQt5 import uic
 from PyQt5.QtCore import pyqtSlot
-# from PyQt5 import QtGui, QtCore
 from PyQt5.QtGui import QIcon, QPixmap, QMovie
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
-from PyQt5.QtWidgets import QFileDialog, QDesktopWidget, QStyleFactory
+from PyQt5.QtWidgets import QFileDialog, QDesktopWidget
 
 import mirrorlist
-# My Imports
 import threads
 from dependency import checker
 
