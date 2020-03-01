@@ -31,9 +31,9 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         uic.loadUi(appFolder + 'MainWindow.ui', self)
 
-        # Dependency and Files checker↓
-        if checker().check() is False:
-            sys.exit("Dependency missing or you have edited something")
+        # # Dependency and Files checker↓
+        # if checker().check() is False:
+        #     sys.exit("Dependency missing or you have edited something")
 
         # Class Object Variables ↓
         self.mirrorlist = mirrorlist.Mirrorlist()
