@@ -32,9 +32,9 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         uic.loadUi(appFolder + 'MainWindow.ui', self)
 
-        # # Dependency and Files checker↓
-        # if checker().check() is False:
-        #     sys.exit("Dependency missing, or you have edited something")
+        # Dependency and Files checker↓
+        if checker().check() is False:
+            sys.exit("Dependency missing, or you have edited something")
 
         # Class Object Variables ↓
         self.mirrorlist = mirrorlist.Mirrorlist()
@@ -175,7 +175,7 @@ class MainWindow(QMainWindow):
         with open(self.mirrorlistTemp, 'w') as file:
             file.write(self.mirrorlistData)
         status = subprocess.getstatusoutput(self.asroot + "mv -f " + self.mirrorlistTemp + " " + self.mirrorlistFile)
-        if status[0] is 0:
+        if status[0] == 0:
             self.statusBar().showMessage("Saved successfully")
             self.labelLoading.setPixmap(self.distro)
         else:
