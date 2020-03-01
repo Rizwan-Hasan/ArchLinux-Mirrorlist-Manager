@@ -14,9 +14,11 @@ from PyQt5.QtGui import QIcon, QPixmap, QMovie
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.QtWidgets import QFileDialog, QDesktopWidget
 
+import resources
 import mirrorlist
 import threads
 from dependency import checker
+
 
 # Application root location ↓
 appFolder = os.path.dirname(os.path.realpath(sys.argv[0])) + '/'
