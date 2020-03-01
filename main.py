@@ -28,6 +28,7 @@ appFolder = os.path.dirname(os.path.realpath(sys.argv[0])) + '/'
 class MainWindow(QMainWindow):
 
     def __init__(self):
+        # noinspection PyArgumentList
         super(MainWindow, self).__init__()
         uic.loadUi(appFolder + 'MainWindow.ui', self)
 
@@ -66,9 +67,11 @@ class MainWindow(QMainWindow):
         distro_name = subprocess.getoutput('lsb_release -i')
         magpieos = re.compile(r'MagpieOS', re.IGNORECASE)
         manjaro = re.compile(r'Manjaro', re.IGNORECASE)
+        # noinspection PyArgumentList,PyArgumentList
         if magpieos.findall(distro_name):
             return ':linux/MagpieOS.png'
         elif manjaro.findall(distro_name):
+            # noinspection PyCallByClass,PyArgumentList
             QMessageBox.information(self, 'Message', "Mirrorlist Manager doesn't support Manjaro")
             sys.exit(0)
         else:
@@ -116,9 +119,11 @@ class MainWindow(QMainWindow):
         self.comboBoxCountry.activated[str].connect(self.comboEntryMaker)
         self.comboBoxNumber.activated[str].connect(self.comboNumberEntryMaker)
 
+    # noinspection PyArgumentList
     @pyqtSlot()  # Qt Framework's Slot Decorator
     # Close event dialogue ↓
     def closeEvent(self, event):
+        # noinspection PyCallByClass
         reply = QMessageBox.question(self, 'Message', "Are you sure to quit?\nAll changes will be lost.",
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if reply == QMessageBox.Yes:
@@ -130,6 +135,7 @@ class MainWindow(QMainWindow):
 
     # Close dialouge message ↓
     def closeDialogue(self):
+        # noinspection PyCallByClass
         reply = QMessageBox.question(self, 'Message', "Are you sure to quit?\nAll changes will be lost.",
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if reply == QMessageBox.Yes:
@@ -146,6 +152,7 @@ class MainWindow(QMainWindow):
             pass
         options = QFileDialog.Options()
         # options |= QFileDialog.DontUseNativeDialog # Qt's builtin File Dialogue
+        # noinspection PyCallByClass
         fileName, _ = QFileDialog.getSaveFileName(self, "Open", "", "All Files (*.*)", options=options)
         if fileName:
             try:
@@ -273,4 +280,3 @@ def main():
 # Start Application ↓
 if __name__ == '__main__':
     main()
-
