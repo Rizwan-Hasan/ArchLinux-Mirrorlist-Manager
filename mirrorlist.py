@@ -14,7 +14,7 @@ class Mirrorlist():
     def __init__(self):
         self.mirrorfile = "/tmp/mirrorlist.txt"
         self.country_code_dataset = self.appFolder + 'country_code.data'
-        self.url = "https://www.archlinux.org/mirrorlist/?country=COUNTRYCODE&protocol=http&protocol=https&ip_version=4"
+        self.url = "https://www.archlinux.org/mirrorlist/?COUNTRYCODEprotocol=http&protocol=https&ip_version=4"
 
     # Mirrorlist getting ↓
     def get_mirrorlist(self, country_code):
